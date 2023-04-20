@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,48 +8,90 @@
     <title>Animacao JQuery</title>
 </head>
 <style>
+    .fora {
+        width: 600px;
+        height: 600px;
+        background-image: linear-gradient(orange, rgb(51, 255, 0));
+        position: relative;
+    }
 
-.fora{
-    width: 600px;
-    height: 600px;
-    background-image: linear-gradient(orange, rgb(51, 255, 0));
-    position: relative;
-}
-.menu{
-    position: absolute;
-    width: 100px;
-    height: 400px;
-    background-color: silver;
-    right: 50px;
-    top: 0px;
-    display: none;
-}
-.menuzinho{
-    width: 100px;
-    height: 50px;
-    background-color: rgba(40, 150, 240, 0.836);
-    box-shadow: 0px 0px 1px 0px black;
-}
-.bolinha{
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: rgb(0, 102, 255);
-    position: absolute;
-    left: -10px;
-    top: -10px
-}
+    .menu {
+        position: absolute;
+        width: 100px;
+        height: 400px;
+        background-color: silver;
+        right: 50px;
+        top: 50px;
+        display: none;
+    }
+
+    .menuzinho {
+        width: 100px;
+        height: 50px;
+        background-color: rgba(40, 150, 240, 0.836);
+        box-shadow: 0px 0px 1px 0px black;
+    }
+
+    .menuzinho2 {
+        width: 100px;
+        height: 50px;
+        background-color: rgba(233, 40, 240, 0.836);
+        box-shadow: 0px 0px 1px 0px black;
+        cursor: pointer;
+    }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        left: 90px;
+        top: 170px;
+        width: 100px;
+        height: 200px;
+        background-color: rgba(240, 40, 40, 0.836);
+        box-shadow: 0px 0px 1px 0px black;
+    }
+
+    .bolinha {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: rgb(0, 102, 255);
+        position: absolute;
+        left: -10px;
+        top: -10px
+    }
+
+    .home {
+        width: 100px;
+        height: 50px;
+        background-color: rgb(4, 76, 134);
+        box-shadow: 0px 0px 1px 0px black;
+        position: absolute;
+        right: 50px;
+        color: #fff;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .home:hover {
+        border: solid #fff 1px;
+        width: 98px;
+        height: 48px;
+    }
 </style>
+
 <body>
     <button onclick="Subir();"> SOBE </button>
     <button onclick="Descer();"> DESCE </button>
-<br><br>
+    <br><br>
     <div class="fora">
+        <div class="home" onclick="AbrirMenu();">Menu</div>
         <div class="menu" id="menu">
             <div class="menuzinho">Fabiola</div>
             <div class="menuzinho">Neymar</div>
             <div class="menuzinho">Casa</div>
-            <div class="menuzinho">AAAA</div>
+            <div class="menuzinho2" onclick="Abrir();">SubMenu </div>
+            <div class="submenu" id="submenu">aaa</div>
             <div class="menuzinho">Suporte</div>
             <div class="menuzinho">Produtos</div>
             <div class="menuzinho">Perfil</div>
@@ -62,23 +105,42 @@
 
     setInterval(MoveBolinha, 4000)
 
-    function MoveBolinha()
-    {
-        $("#bolinha").animate({left:'590'},1000)
-        $("#bolinha").animate({left:'590',top:'590'},1000)
-        $("#bolinha").animate({left:'-10',top:'590'},1000)
-        $("#bolinha").animate({left:'-10',top:'-10'},1000)
+    function MoveBolinha() {
+        $("#bolinha").animate({ left: '590' }, 1000)
+        $("#bolinha").animate({ left: '590', top: '590' }, 1000)
+        $("#bolinha").animate({ left: '-10', top: '590' }, 1000)
+        $("#bolinha").animate({ left: '-10', top: '-10' }, 1000)
     }
-
-    function Subir()
-    {
-        $("#menu").animate({right:'50'},1000)
+    m = false
+    function AbrirMenu() {
+        if (m == false) {
+            $("#menu").slideDown(500)
+            m = true
+        }
+        else {
+            $("#menu").slideUp(500)
+            m = false
+            $("#submenu").slideUp(1000)
+            s = false
+        }
+    }
+    function Subir() {
         $("#menu").slideUp(500)
     }
-        function Descer()
-    {
+    function Descer() {
         $("#menu").slideDown(500)
-        $("#menu").animate({right:'100'},1000)
+    }
+    s = false
+    function Abrir() {
+        if (s == false) {
+            $("#submenu").slideDown(1000)
+            s = true
+        }
+        else {
+            $("#submenu").slideUp(1000)
+            s = false
+        }
     }
 </script>
+
 </html>
